@@ -1031,6 +1031,16 @@ fun NewSessionScreen(
                         stringResource(R.string.new_session_permission_catalog_failed)
                     runtimeSelection.modelCatalog.stale || runtimeSelection.permissionCatalog.stale ->
                         stringResource(R.string.new_session_catalog_stale)
+                    !workspaceReady && !choosePath && selectedWorkspacePath.isBlank() ->
+                        stringResource(R.string.new_session_no_project)
+                    runtimeSelection.canUseModelCatalog && runtimeSelection.modelCatalog.fresh &&
+                        runtimeSelection.modelCatalog.data?.models?.isNotEmpty() == true &&
+                        runtimeSelection.selectedModelSelectionId == null ->
+                        stringResource(R.string.new_session_choose_model)
+                    runtimeSelection.canUsePermissionCatalog && runtimeSelection.permissionCatalog.fresh &&
+                        runtimeSelection.permissionCatalog.data?.permissions?.isNotEmpty() == true &&
+                        runtimeSelection.selectedPermissionSelectionId == null ->
+                        stringResource(R.string.new_session_choose_permission)
                     else -> null
                 }
                 val error = runtimeError
